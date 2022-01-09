@@ -1,0 +1,16 @@
+[
+    {
+        "role": "Student",
+        "firstName": "Илья",
+        "lastName": "Солодов",
+        "group": "РИ-480015",
+        "phone": "89041606894",
+        "email": "",
+        "about": "",
+        "username": "suckdick",
+        "password": "$2a$10$2JWSlY6CWJ7qeTKtemxowuT.BLk6X0EgeU2h8uPmZxntzZNqj4AMe",
+        "id": 1,
+        "dateCreated": "2022-01-08T17:35:07.955Z",
+        "dateUpdated": "2022-01-08T17:35:07.955Z"
+    }
+]
