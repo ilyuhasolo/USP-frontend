@@ -22,6 +22,15 @@ class SearchHandler extends Component {
         TeamInterests: null,
         TeamVacantRoles : null
     }
+    teacherFilters = {
+        Name : null,
+        TeacherInterests : null,
+        Post : null
+    }
+    employerFilters = {
+        Company : null,
+        EmployerInterests : null
+    }
     constructor(props) {
         super(props);
 
@@ -36,6 +45,7 @@ class SearchHandler extends Component {
         this.getTeams = this.getTeams.bind(this);
         this.getTeachers = this.getTeachers.bind(this);
         this.getEmployers = this.getEmployers.bind(this);
+        //this.resetTeamFilters = this.resetTeamFilters.bind(this);
 
         this.state = {
             find : false,
@@ -110,57 +120,54 @@ class SearchHandler extends Component {
         }
         const req = await fetch('https://localhost:7040/GetFilteredTeams?filters='+JSON.stringify(this.teamFilters), this.requestOptions);
         const res = req.json().then(response => this.teams = response);
-        // if(interests !== []) {
-        //     interests.forEach(interest => {
-        //         this.teams = this.teams.filter(team => team.interests.includes(interest));
-        //     });
-        //     this.find = true;
-        // }
-        // if(vacantRoles !== []){
-        //     vacantRoles.forEach(role => {
-        //         this.teams = this.teams.filter(team => team.vacantRoles.includes(role));
-        //     });
-        //     this.find = true;
-        // }
         this.setState(state => {
             return {find : true}
         });
     }
 
-    handleTeacherFilter(event){
+    async handleTeacherFilter(event){
         event.preventDefault();
+        const user = userService.userValue
+        this.requestOptions = {
+            method : 'GET',
+            headers : {Authorization: `Bearer ${user}`}
+        }
         const interests = InterestsContainer.choseInterests;
-        if(this.find === true){
-            this.teachers= this.recievedTeachers;
-            this.find = false;
+        if(interests !== []){
+            this.teacherFilters.TeacherInterests = interests;
         }
-
-        if(interests !== []) {
-            interests.forEach(interest => {
-                this.teachers = this.teachers.filter(teacher => teacher.interests.includes(interest));
-            });
-            this.find = true;
+        if(this.name !== ""){
+            this.teacherFilters.Name = this.name;
         }
+        const req = await fetch('https://localhost:7040/GetFilteredTeachers?filters='+JSON.stringify(this.teacherFilters), this.requestOptions);
+        const res = req.json().then(response => this.teachers = response);
         this.setState(state => {
             return {find : true}
         });
 
     }
+
+    // resetTeamFilters(){
+    //     this.getTeachers();
+    //     this.setState(state =>{
+    //         return {find : false}
+    //     })
+    // }
+    //
+    // resetTeacherFilters(){
+    //     this.teachers = this.recievedTeachers;
+    //     this.setState(state =>{
+    //         return {find : false}
+    //     })
+    // }
 
     handleTeamName(event){
         event.preventDefault();
-
-        if(this.find === true) {
-            this.teams = this.recievedTeams;
-            this.find = false;
-        }
-        if(this.find === false){
-            this.teams = this.teams.filter(team => team.name.toUpperCase() === this.name.toUpperCase());
-            this.find = true;
-            this.setState(state => {
-                return {find : true};
-            });
-        }
+        this.teams = this.teams.filter(team => team.name.toUpperCase() === this.name.toUpperCase());
+        this.find = true;
+        this.setState(state => {
+            return {find : true};
+        });
     }
 
     handleTeacherName(event){
@@ -180,20 +187,22 @@ class SearchHandler extends Component {
 
     }
 
-    handleEmployerFilter(event){
+    async handleEmployerFilter(event){
         event.preventDefault();
+        const user = userService.userValue
+        this.requestOptions = {
+            method : 'GET',
+            headers : {Authorization: `Bearer ${user}`}
+        }
         const interests = InterestsContainer.choseInterests;
-        if(this.find === true){
-            this.employers = this.recievedEmployers;
-            this.find = false;
+        if(interests !== []){
+            this.employerFilters.EmployerInterests = interests;
         }
-
-        if(interests !== []) {
-            interests.forEach(interest => {
-                this.employers = this.employers.filter(employer => employer.interests.includes(interest));
-            });
-            this.find = true;
+        if(this.name !== ""){
+            this.employerFilters.Company = this.name;
         }
+        const req = await fetch('https://localhost:7040/GetFilteredEmployers?filters='+JSON.stringify(this.employerFilters), this.requestOptions);
+        const res = req.json().then(response => this.employers = response);
         this.setState(state => {
             return {find : true}
         });
@@ -272,12 +281,13 @@ class SearchHandler extends Component {
                             <div className="contains" >
                                 <h3>Название команды</h3>
                                 <input onChange={this.changeName} name="login" type="text" className={`form-control forma`} />
-                                <button onClick={this.handleTeamName} className="but button">Найти</button>
+                                <button onClick={this.handleTeamFilters} className="but button">Найти</button>
                             </div>
                             <TeamContainer teams={this.teams}/>
                             <Interests role={role}>Интересы команды</Interests>
                             <VacantRoles>Вакантые роли</VacantRoles>
                             <button className="but button find" onClick={this.handleTeamFilters}>Принять</button>
+                            <a className={"reset"} onClick={this.getTeams} style={{display: "inline-block"}}>Сбросить</a>
                             <style>{".contains{position:relative; margin-top: 3%} .but{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out} .button{position: relative; top:15px;  color:#fff;background-color:#007bff;border-color:#007bff}.button:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.forma{display: inline-block}.floating-button {text-decoration: none;display: inline-block; width: 150px;height: 45px;line-height: 45px;font-family: sans-serif;font-size: 12px;text-align: center;letter-spacing: 3px;font-weight: 600;color: #524f4e;background: white;box-shadow: 0 8px 15px rgba(0, 0, 0, .1);transition: .3s;}.floating-button:hover {background: #007bff;box-shadow: 0 15px 20px rgba(0,123,255, 0.4);color: white;transform: translateY(-7px);} .find{top: 55px}"}</style>
                         </div>
                     );
@@ -293,11 +303,12 @@ class SearchHandler extends Component {
                             <div className="contains">
                                 <h3>Фамилия и имя</h3>
                                 <input onChange={this.changeName} name="login" type="text" className={`form-control forma`} />
-                                <button onClick={this.handleTeacherName} className="but button">Найти</button>
+                                <button onClick={this.handleTeacherFilter} className="but button">Найти</button>
                             </div>
                             <TeacherContainer teachers={this.teachers}/>
                             <Interests role={role}>Интересы куратора</Interests>
                             <button className="but button find" onClick={this.handleTeacherFilter}>Принять</button>
+                            <a className={"reset"} onClick={this.getTeachers} style={{display: "inline-block"}}>Сбросить</a>
                             <style>{".contains{position:relative; margin-top: 3%} .but{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out} .button{position: relative; top:15px;  color:#fff;background-color:#007bff;border-color:#007bff}.button:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.forma{display: inline-block}.floating-button {text-decoration: none;display: inline-block; width: 150px;height: 45px;line-height: 45px;font-family: sans-serif;font-size: 12px;text-align: center;letter-spacing: 3px;font-weight: 600;color: #524f4e;background: white;box-shadow: 0 8px 15px rgba(0, 0, 0, .1);transition: .3s;}.floating-button:hover {background: #007bff;box-shadow: 0 15px 20px rgba(0,123,255, 0.4);color: white;transform: translateY(-7px);} .find{top: 55px}"}</style>
                         </div>
                     );
@@ -313,11 +324,12 @@ class SearchHandler extends Component {
                             <div className="contains">
                                 <h3 >Название компании</h3>
                                 <input  onChange={this.changeName} name="login" type="text" className={`form-control forma`} />
-                                <button  onClick={this.handleEmployerName} className="but button">Найти</button>
+                                <button  onClick={this.handleEmployerFilter} className="but button">Найти</button>
                             </div>
                             <EmployerContainer employers={this.employers} />
                             <Interests role={role}>Интересы работодателя</Interests>
                             <button className="but button find" onClick={this.handleEmployerFilter}>Принять</button>
+                            <a className={"reset"} onClick={this.getEmployers} style={{display: "inline-block"}}>Сбросить</a>
                             <style>{".contains{position:relative; margin-top: 3%} .but{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out} .button{position: relative; top:15px;  color:#fff;background-color:#007bff;border-color:#007bff}.button:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.forma{display: inline-block}.floating-button {text-decoration: none;display: inline-block; width: 150px;height: 45px;line-height: 45px;font-family: sans-serif;font-size: 12px;text-align: center;letter-spacing: 3px;font-weight: 600;color: #524f4e;background: white;box-shadow: 0 8px 15px rgba(0, 0, 0, .1);transition: .3s;}.floating-button:hover {background: #007bff;box-shadow: 0 15px 20px rgba(0,123,255, 0.4);color: white;transform: translateY(-7px);} .find{top: 55px}"}</style>
                         </div>
                     );
