@@ -17,6 +17,11 @@ class SearchHandler extends Component {
     recievedEmployers = [];
     name = "";
     find = false;
+    teamFilters = {
+        teamName : null,
+        teamInterests: null,
+        teamVacantRoles : null
+    }
     constructor(props) {
         super(props);
 
@@ -81,7 +86,7 @@ class SearchHandler extends Component {
         });
     }
 
-    handleTeamFilters(event){
+    async handleTeamFilters(event){
         event.preventDefault();
         const interests = InterestsContainer.choseInterests;
         const vacantRoles = RolesContainer.choseRoles;
@@ -89,19 +94,29 @@ class SearchHandler extends Component {
             this.teams = this.recievedTeams;
             this.find = false;
         }
-
-        if(interests !== []) {
-            interests.forEach(interest => {
-                this.teams = this.teams.filter(team => team.interests.includes(interest));
-            });
-            this.find = true;
+        if(interests !== []){
+            this.teamFilters.teamInterests = interests;
         }
         if(vacantRoles !== []){
-            vacantRoles.forEach(role => {
-                this.teams = this.teams.filter(team => team.vacantRoles.includes(role));
-            });
-            this.find = true;
+            this.teamFilters.teamVacantRoles = vacantRoles;
         }
+        if(this.name !== ""){
+            this.teamFilters.teamName = this.name;
+        }
+        const req = await fetch('https://localhost:7040/GetFilteredTeams?filters='+JSON.stringify(this.teamFilters));
+        const res = req.json().then(response => this.teams = response);
+        // if(interests !== []) {
+        //     interests.forEach(interest => {
+        //         this.teams = this.teams.filter(team => team.interests.includes(interest));
+        //     });
+        //     this.find = true;
+        // }
+        // if(vacantRoles !== []){
+        //     vacantRoles.forEach(role => {
+        //         this.teams = this.teams.filter(team => team.vacantRoles.includes(role));
+        //     });
+        //     this.find = true;
+        // }
         this.setState(state => {
             return {find : true}
         });
