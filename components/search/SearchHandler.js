@@ -88,6 +88,11 @@ class SearchHandler extends Component {
 
     async handleTeamFilters(event){
         event.preventDefault();
+        const user = userService.userValue
+        this.requestOptions = {
+            method : 'GET',
+            headers : {Authorization: `Bearer ${user}`}
+        }
         const interests = InterestsContainer.choseInterests;
         const vacantRoles = RolesContainer.choseRoles;
         if(this.find === true){
@@ -103,7 +108,7 @@ class SearchHandler extends Component {
         if(this.name !== ""){
             this.teamFilters.teamName = this.name;
         }
-        const req = await fetch('https://localhost:7040/GetFilteredTeams?filters='+JSON.stringify(this.teamFilters));
+        const req = await fetch('https://localhost:7040/GetFilteredTeams?filters='+JSON.stringify(this.teamFilters), this.requestOptions);
         const res = req.json().then(response => this.teams = response);
         // if(interests !== []) {
         //     interests.forEach(interest => {
