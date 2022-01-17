@@ -34,8 +34,7 @@ export default function Edit(){
         }
 
 
-        const req = await fetch(`https://localhost:7040/EditStudentProfile`, requestOptions);
-        const res = await req.json();
+        fetch(`https://localhost:7040/EditStudentProfile`, requestOptions);
         router.push("/");
     }
 

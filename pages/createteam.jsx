@@ -33,6 +33,7 @@ export default function CreateTeam(){
         const roles = RolesContainer.choseRoles;
         team.interests = interests;
         team.vacantRoles = roles;
+        let teamId;
         const requestOptions = {
             method : 'POST',
             headers : {'Content-Type': 'application/json', Authorization: `Bearer ${user}`},
@@ -41,13 +42,13 @@ export default function CreateTeam(){
 
 
         const req = await fetch(`https://localhost:7040/CreateNewTeam`, requestOptions);
-        const res = await req.json();
+        const res = await req.json().then(response => teamId = response.id);
 
         const reqOptions = {
             method : 'PUT',
             headers : {Authorization: `Bearer ${user}`}
         }
-        fetch('https://localhost:7040/AddPersonToTeam?PersonId='+id+'&TeamId='+res.id, reqOptions);
+        fetch('https://localhost:7040/AddPersonToTeam?PersonId='+id+'&TeamId='+teamId, reqOptions);
 
         router.push("/");
     }
