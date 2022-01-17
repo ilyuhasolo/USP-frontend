@@ -18,9 +18,9 @@ class SearchHandler extends Component {
     name = "";
     find = false;
     teamFilters = {
-        teamName : null,
-        teamInterests: null,
-        teamVacantRoles : null
+        TeamName : null,
+        TeamInterests: null,
+        TeamVacantRoles : null
     }
     constructor(props) {
         super(props);
@@ -100,13 +100,13 @@ class SearchHandler extends Component {
             this.find = false;
         }
         if(interests !== []){
-            this.teamFilters.teamInterests = interests;
+            this.teamFilters.TeamInterests = interests;
         }
         if(vacantRoles !== []){
-            this.teamFilters.teamVacantRoles = vacantRoles;
+            this.teamFilters.TeamVacantRoles = vacantRoles;
         }
         if(this.name !== ""){
-            this.teamFilters.teamName = this.name;
+            this.teamFilters.TeamName = this.name;
         }
         const req = await fetch('https://localhost:7040/GetFilteredTeams?filters='+JSON.stringify(this.teamFilters), this.requestOptions);
         const res = req.json().then(response => this.teams = response);

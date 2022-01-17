@@ -64,7 +64,7 @@ export default function Interests(props){
                     interest => {
                         return <div id={interest.interestName} onClick={handleClick} key={interest.id} className="op"><p>{interest.interestName}</p></div>
                     })}
-            <style>{".roles-container{ position:relative;border: 1px solid; top:40px; height:300px; width: 150px; overflow-x: hidden; overflow-y: auto;} .op{position: relative; margin-top:20px; border-radius: 50%; background: lightgrey; height: 50px; width: 100px} .op:hover{background: grey} .activer{color: white;background: #007bff} .op p{position:relative; top:20%}"}</style>
+            <style>{".interests-container{ position:relative;border: 1px solid; top:40px; height:300px; width: 150px; overflow-x: hidden; overflow-y: auto;} .op{position: relative; margin-top:20px; border-radius: 50%; background: lightgrey; height: 50px; width: 100px} .op:hover{background: grey} .activer{color: white;background: #007bff} .op p{position:relative; top:20%}"}</style>
         </div>
     </>
 }
