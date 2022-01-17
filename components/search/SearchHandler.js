@@ -19,11 +19,6 @@ class SearchHandler extends Component {
     find = false;
     constructor(props) {
         super(props);
-        this.state = {
-            find : false,
-            thisRole : 0
-        }
-        this.getTeams();
 
         this.handleTeamFilters = this.handleTeamFilters.bind(this);
         this.handleRole = this.handleRole.bind(this);
@@ -36,6 +31,12 @@ class SearchHandler extends Component {
         this.getTeams = this.getTeams.bind(this);
         this.getTeachers = this.getTeachers.bind(this);
         this.getEmployers = this.getEmployers.bind(this);
+
+        this.state = {
+            find : false,
+            thisRole : 0
+        }
+        this.getTeams();
     }
 
     async getTeams(){
