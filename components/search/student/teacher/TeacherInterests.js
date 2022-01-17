@@ -1,6 +1,6 @@
-import {userService} from "../../../services";
+import {userService} from "../../../../services";
 import {useEffect, useState} from "react";
-import {InterestsContainer} from "../../../helpers/interests-container";
+import {InterestsContainer} from "../../../../helpers/interests-container";
 import React from "react";
 import PropTypes from "prop-types";
 
