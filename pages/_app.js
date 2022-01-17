@@ -53,6 +53,7 @@ function App({ Component, pageProps }) {
                 <title>UrFU-front</title>
 
                 <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
             </Head>
 
             <div className={`app-container ${user? 'bg-light' : ''}`}>

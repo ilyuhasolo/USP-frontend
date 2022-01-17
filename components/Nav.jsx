@@ -24,7 +24,7 @@ function Nav() {
         <nav className="navbar navbar-expand navbar-dark bg-dark">
             <div className="navbar-nav">
                 <NavLink href="/" exact className="nav-item nav-link">Профиль</NavLink>
-                <NavLink href="/users" className="nav-item nav-link">Поиск</NavLink>
+                <NavLink href="/search" className="nav-item nav-link">Поиск</NavLink>
                 <a onClick={logout} className="nav-item nav-link">Выход</a>
             </div>
         </nav>
