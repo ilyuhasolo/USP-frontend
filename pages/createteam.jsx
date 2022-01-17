@@ -42,7 +42,7 @@ export default function CreateTeam(){
 
 
         const req = await fetch(`https://localhost:7040/CreateNewTeam`, requestOptions);
-        const res = await req.json().then(response => teamId = response.id);
+        const res = await req.json().then(response => teamId = response);
 
         const reqOptions = {
             method : 'PUT',
