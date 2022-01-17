@@ -1,28 +1,26 @@
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-const bcrypt = require('bcryptjs');
+import React from 'react';
+import {useRouter} from "next/router";
+import * as Yup from "yup";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import bcrypt from "bcryptjs";
+import {alertService, userService} from "../../services";
+import {Link} from "../Link";
+import {Layout} from "./Layout";
 
-import { Link } from 'components';
-import { Layout } from 'components/account';
-import { userService, alertService } from 'services';
-
-export default Register;
-
-function Register() {
+function RegisterStudent() {
     const router = useRouter();
     // form validation rules
     const validationSchema = Yup.object().shape({
-        Group: Yup.string()
+        group: Yup.string()
             .required('Group is required'),
-        PhoneNumber: Yup.string()
+        phoneNumber: Yup.string()
             .required('Phone is required'),
-        Email: Yup.string(),
-        About: Yup.string(),
-        Login: Yup.string()
+        email: Yup.string(),
+        about: Yup.string(),
+        name: Yup.string()
             .required('Username is required'),
-        Password: Yup.string()
+        password: Yup.string()
             .required('Password is required')
             .min(6, 'Password must be at least 6 characters')
     });
@@ -33,8 +31,7 @@ function Register() {
     const { errors } = formState;
 
     function onSubmit(user) {
-        const {password} = user;
-        user.Password = bcrypt.hashSync(password, 10);
+        user.role = "Student";
         return userService.register(user)
             .then(() => {
                 alertService.success('Registration successful', { keepAfterRouteChange: true });
@@ -56,8 +53,8 @@ function Register() {
                         </div>
                         <div className="form-group">
                             <label>Номер телефона</label>
-                            <input name="phone" type="text" {...register('phone')} className={`form-control ${errors.phone ? 'is-invalid' : ''}`} />
-                            <div className="invalid-feedback">{errors.phone?.message}</div>
+                            <input name="phone" type="text" {...register('phoneNumber')} className={`form-control ${errors.phoneNumber ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.phoneNumber?.message}</div>
                         </div>
                         <div className="form-group">
                             <label>Email</label>
@@ -70,9 +67,9 @@ function Register() {
                             <div className="invalid-feedback">{errors.about?.message}</div>
                         </div>
                         <div className="form-group">
-                            <label>Имя пользователя</label>
-                            <input name="username" value="Имя Фамилия" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
-                            <div className="invalid-feedback">{errors.username?.message}</div>
+                            <label>Имя и фамилия</label>
+                            <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.name?.message}</div>
                         </div>
                         <div className="form-group">
                             <label>Пароль</label>
@@ -83,10 +80,12 @@ function Register() {
                             {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                             Зарегистрироваться
                         </button>
-                        <Link href="/account/register" className="btn btn-link">Назад</Link>
+                        <Link href="/account/login" className="btn btn-link">Отмена</Link>
                     </form>
                 </div>
             </div>
         </Layout>
     );
 }
+
+export default RegisterStudent;

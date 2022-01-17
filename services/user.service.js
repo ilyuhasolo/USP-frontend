@@ -6,7 +6,6 @@ import {BehaviorSubject} from 'rxjs';
 import {fetchWrapper} from 'helpers';
 
 let querystring = require('querystring');
-const bcrypt = require('bcryptjs');
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}`;
 const personUrl = `${publicRuntimeConfig.apiUrl}/GetPersonInfo`;
@@ -22,15 +21,16 @@ export const userService = {
     update
 };
 
-function login(Login, password) {
-    const Password = bcrypt.hashSync(password);
-    return fetchWrapper.post(`${baseUrl}/AuthorizePerson`, { Login, Password })
+function login(name, password) {
+    return fetchWrapper.post(`${baseUrl}/AuthorizePerson`, { name, password })
         .then(user => {
-            userSubject.next(user.AccessToken);
+            userSubject.next(user.accessToken);
             localStorage.setItem('id', JSON.stringify(user.id));
             localStorage.setItem('token', JSON.stringify(user.accessToken));
             localStorage.setItem('role', JSON.stringify(user.role));
-            localStorage.setItem('studentRole', "Student");
+            localStorage.setItem('studentRole', JSON.stringify("Student"));
+            localStorage.setItem('teacherRole', JSON.stringify("Teacher"));
+            localStorage.setItem('employerRole', JSON.stringify("Employer"));
 
             return user;
         });
@@ -62,5 +62,5 @@ function update(id, params) {
         //         userSubject.next(user);
         //     }
         //     return x;
-        //});
+        // });
 }
