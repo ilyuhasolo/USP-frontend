@@ -10,6 +10,13 @@ export default function Edit(){
     const router = useRouter();
     const user = userService.userValue;
     const id = localStorage.getItem('id').replace(/"/g, "");
+    let resUser = {
+        newGroup : null,
+        newPhoneNumber: null,
+        newEmail: null,
+        newAbout: null,
+        newPassword : null
+    }
 
     const validationSchema = Yup.object().shape({
         newGroup: Yup.string().nullable(true),
@@ -26,11 +33,26 @@ export default function Edit(){
 
     async function onSubmit(usr){
         const user = userService.userValue;
-        usr.personId = id;
+        if(usr.newGroup !== ""){
+            resUser.newGroup = usr.newGroup;
+        }
+        if(usr.newPhoneNumber !== ""){
+            resUser.newPhoneNumber = usr.newPhoneNumber;
+        }
+        if(usr.newEmail !== ""){
+            resUser.newEmail = usr.newEmail;
+        }
+        if(usr.newAbout !== ""){
+            resUser.newAbout = usr.newAbout;
+        }
+        if(usr.newPassword !== ""){
+            resUser.newPassword = usr.newPassword;
+        }
+        resUser.personId = id;
         const requestOptions = {
             method : 'POST',
             headers : {'Content-Type': 'application/json', Authorization: `Bearer ${user}`},
-            body : JSON.stringify(usr)
+            body : JSON.stringify(resUser)
         }
 
 
