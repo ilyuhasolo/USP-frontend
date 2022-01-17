@@ -45,6 +45,7 @@ export default function Interests(props){
 
     function handleClick(event){
         if(!InterestsContainer.choseInterests.includes(event.target.id)){
+            console.log(event.target.id);
             InterestsContainer.appendChoseInterests(event.target.id);
             event.target.classList.add("activei");
         }
@@ -61,9 +62,9 @@ export default function Interests(props){
             <hr size="3px"/>
                 {interests.map(
                     interest => {
-                        return <div id={interest.interestName} onClick={handleClick} key={interest.id} className="op"><center>{interest.interestName}</center></div>
+                        return <div id={interest.interestName} onClick={handleClick} key={interest.id} className="op"><p>{interest.interestName}</p></div>
                     })}
-            <style>{".interests-container{ position:relative;border: 1px solid; height:300px; width: 150px; top:40px; overflow-x: hidden; overflow-y: auto;} .op{position: relative; margin-top:20px; border-radius: 50%; background: lightgrey; height: 50px; width: 100px} .op:hover{background: grey} .activei{background: #007bff;color: white} .op center{position:relative; top:20%}"}</style>
+            <style>{".interests-container{ position:relative;border: 1px solid; height:300px; width: 150px; top:40px; overflow-x: hidden; overflow-y: auto;} .op{position: relative; margin-top:20px; border-radius: 50%; background: lightgrey; height: 50px; width: 100px; text-align: center} .op:hover{background: grey} .activei{background: #007bff; color: white} .op p{position:relative; top:20%}"}</style>
         </div>
     </>
 }
