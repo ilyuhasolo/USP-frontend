@@ -4,7 +4,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
 import {Link} from "../components";
 import {userService} from "../services";
-import Interests from "../components/search/student/Interests";
+import AllInterests from "../components/account/AllInterests";
 import {InterestsContainer} from "../helpers/interests-container";
 import VacantRoles from "../components/search/student/teams/VacantRoles";
 import {RolesContainer} from "../helpers/roles-container";
@@ -71,7 +71,7 @@ export default function CreateTeam(){
                 <input name="description" type="text" {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} />
                 <div className="invalid-feedback">{errors.description?.message}</div>
             </div>
-            <Interests style={{display: "inline-block"}} role={"3"}>Интересы</Interests>
+            <AllInterests style={{display: "inline-block"}}>Интересы</AllInterests>
             <VacantRoles style={{display: "inline-block"}}>Вакантные роли</VacantRoles>
             <button disabled={formState.isSubmitting} className="butt but-st">
                 {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}

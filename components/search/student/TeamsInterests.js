@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-export default function Interests(props){
+export default function TeamsInterests(props){
     const [interests, setInterests] = useState([]);
     useEffect( () => {
             const user = userService.userValue;
@@ -13,34 +13,10 @@ export default function Interests(props){
                 method: 'GET',
                 headers: {Authorization: `Bearer ${user}`}
             };
-            if(localStorage.getItem('role') === localStorage.getItem('studentRole')) {
-                if(JSON.stringify(props.role) === JSON.stringify('0')) {
-                    fetch('https://localhost:7040/GetAllTeamsInterests', requestOptions)
-                        .then(response => response.json())
-                        .then(response => setInterests(response));
-                }
-                else if(JSON.stringify(props.role) === JSON.stringify('1')){
-                    fetch('https://localhost:7040/GetAllTeachersInterests', requestOptions)
-                        .then(response => response.json())
-                        .then(response => setInterests(response));
-                }
-                else if(JSON.stringify(props.role) === JSON.stringify('2')){
-                    fetch('https://localhost:7040/GetAllEmployersInterests', requestOptions)
-                        .then(response => response.json())
-                        .then(response => setInterests(response));
-                }
-                else if(JSON.stringify(props.role) === JSON.stringify('3')){
-                    fetch('https://localhost:7040/GetAllInterests', requestOptions)
-                        .then(response => response.json())
-                        .then(response => setInterests(response));
-                }
-            }
-            else if(localStorage.getItem('role') === localStorage.getItem('roleTeacher')){
 
-            }
-            else if(localStorage.getItem('role') === localStorage.getItem('roleStudent')){
-
-            }
+            fetch('https://localhost:7040/GetAllTeamsInterests', requestOptions)
+                .then(response => response.json())
+                .then(response => setInterests(response));
     },[])
 
     function handleClick(event){

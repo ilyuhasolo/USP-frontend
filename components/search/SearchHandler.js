@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Interests from "./student/Interests";
+import TeamsInterests from "./student/TeamsInterests";
+import TeacherInterests from "./student/teacher/TeacherInterests";
+import EmployersInterests from "./student/employer/EmployersInterests";
 import {userService} from "../../services";
 import {InterestsContainer} from "../../helpers/interests-container";
 import TeamContainer from "./student/teams/TeamContainer";
@@ -284,10 +286,10 @@ class SearchHandler extends Component {
                                 <button onClick={this.handleTeamFilters} className="but button">Найти</button>
                             </div>
                             <TeamContainer teams={this.teams}/>
-                            <Interests role={role}>Интересы команды</Interests>
+                            <TeamsInterests>Интересы команды</TeamsInterests>
                             <VacantRoles>Вакантые роли</VacantRoles>
                             <button className="but button find" onClick={this.handleTeamFilters}>Принять</button>
-                            <a className={"reset"} onClick={this.getTeams} style={{display: "inline-block"}}>Сбросить</a>
+                            <a className={"reset"} onClick={this.getTeams} style={{display: "inline-block", marginTop: "20px"}}>Сбросить</a>
                             <style>{".contains{position:relative; margin-top: 3%} .but{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out} .button{position: relative; top:15px;  color:#fff;background-color:#007bff;border-color:#007bff}.button:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.forma{display: inline-block}.floating-button {text-decoration: none;display: inline-block; width: 150px;height: 45px;line-height: 45px;font-family: sans-serif;font-size: 12px;text-align: center;letter-spacing: 3px;font-weight: 600;color: #524f4e;background: white;box-shadow: 0 8px 15px rgba(0, 0, 0, .1);transition: .3s;}.floating-button:hover {background: #007bff;box-shadow: 0 15px 20px rgba(0,123,255, 0.4);color: white;transform: translateY(-7px);} .find{top: 55px}"}</style>
                         </div>
                     );
@@ -306,9 +308,9 @@ class SearchHandler extends Component {
                                 <button onClick={this.handleTeacherFilter} className="but button">Найти</button>
                             </div>
                             <TeacherContainer teachers={this.teachers}/>
-                            <Interests role={role}>Интересы куратора</Interests>
+                            <TeacherInterests>Интересы куратора</TeacherInterests>
                             <button className="but button find" onClick={this.handleTeacherFilter}>Принять</button>
-                            <a className={"reset"} onClick={this.getTeachers} style={{display: "inline-block"}}>Сбросить</a>
+                            <a className={"reset"} onClick={this.getTeachers} style={{display: "inline-block", marginTop: "20px"}}>Сбросить</a>
                             <style>{".contains{position:relative; margin-top: 3%} .but{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out} .button{position: relative; top:15px;  color:#fff;background-color:#007bff;border-color:#007bff}.button:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.forma{display: inline-block}.floating-button {text-decoration: none;display: inline-block; width: 150px;height: 45px;line-height: 45px;font-family: sans-serif;font-size: 12px;text-align: center;letter-spacing: 3px;font-weight: 600;color: #524f4e;background: white;box-shadow: 0 8px 15px rgba(0, 0, 0, .1);transition: .3s;}.floating-button:hover {background: #007bff;box-shadow: 0 15px 20px rgba(0,123,255, 0.4);color: white;transform: translateY(-7px);} .find{top: 55px}"}</style>
                         </div>
                     );
@@ -327,9 +329,9 @@ class SearchHandler extends Component {
                                 <button  onClick={this.handleEmployerFilter} className="but button">Найти</button>
                             </div>
                             <EmployerContainer employers={this.employers} />
-                            <Interests role={role}>Интересы работодателя</Interests>
+                            <EmployersInterests >Интересы работодателя</EmployersInterests>
                             <button className="but button find" onClick={this.handleEmployerFilter}>Принять</button>
-                            <a className={"reset"} onClick={this.getEmployers} style={{display: "inline-block"}}>Сбросить</a>
+                            <a className={"reset"} onClick={this.getEmployers} style={{display: "inline-block", marginTop: "20px"}}>Сбросить</a>
                             <style>{".contains{position:relative; margin-top: 3%} .but{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out, border-color .15s ease-in-out,box-shadow .15s ease-in-out} .button{position: relative; top:15px;  color:#fff;background-color:#007bff;border-color:#007bff}.button:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.forma{display: inline-block}.floating-button {text-decoration: none;display: inline-block; width: 150px;height: 45px;line-height: 45px;font-family: sans-serif;font-size: 12px;text-align: center;letter-spacing: 3px;font-weight: 600;color: #524f4e;background: white;box-shadow: 0 8px 15px rgba(0, 0, 0, .1);transition: .3s;}.floating-button:hover {background: #007bff;box-shadow: 0 15px 20px rgba(0,123,255, 0.4);color: white;transform: translateY(-7px);} .find{top: 55px}"}</style>
                         </div>
                     );
