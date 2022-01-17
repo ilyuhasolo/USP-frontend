@@ -12,7 +12,7 @@ export class InterestsContainer{
     }
 
     static clear(){
-        choseInterests = []
+        choseInterests.length = 0;
     }
 
     static removeValue(value){
