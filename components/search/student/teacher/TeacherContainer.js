@@ -34,7 +34,7 @@ function TeacherContainer(props) {
                         </div>
                     })}
                 </ul>
-                <style>{".row td:nth-child(1){background: #007bff; margin-top: -1px; margin-left: 10px; border-radius: .75em; padding:2px; color: white}.content{border: .1em solid lightgrey; border-radius: .75em; margin-bottom:10px} .about{display: none; margin-top: 10px;} .content:hover{border: .3em solid #007bff;} .phone{display:none} .content:hover>.phone{display:block} .content:hover>.about{display:block} li{list-style-type : none;  } td h3 {position: relative; display: inline-block; text-align: center;} .institute{position: relative;display: inline-block; margin-left: 20%} .interests{position:  relative; margin-left: 30px; margin-top: 1px; display: inline-block} .container{display: block; width: 1000px; position: absolute; left: 10%; top:55%}"}</style>
+                <style>{".row td:nth-child(1){background: #007bff; margin-top: -1px; margin-left: 10px; border-radius: .75em; padding:2px; color: white}.content{border: .1em solid lightgrey; border-radius: .75em; margin-bottom:10px} .about{display: none; margin-top: 10px;} .content:hover{border: .3em solid #007bff;} .phone{display:none} .content:hover>.phone{display:block} .content:hover>.about{display:block} li{list-style-type : none;  } td h3 {position: relative; display: inline-block; text-align: center;} .institute{position: relative;display: inline-block; margin-left: 20%} .interests{position:  relative; margin-left: 30px; margin-top: 1px; display: inline-block} .container{display: block; width: 1000px; position: absolute; left: 10%; top:35%}"}</style>
             </div>
         </Layout>
     }
