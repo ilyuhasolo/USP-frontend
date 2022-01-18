@@ -16,7 +16,10 @@ function RegisterTeacher() {
             .required('Institute is required'),
         post: Yup.string()
             .required('About is required'),
-        login: Yup.string()
+        phoneNumber : Yup.string()
+            .required('Phone is required'),
+        email : Yup.string(),
+        name: Yup.string()
             .required('Username is required'),
         password: Yup.string()
             .required('Password is required')
@@ -54,9 +57,19 @@ function RegisterTeacher() {
                             <div className="invalid-feedback">{errors.post?.message}</div>
                         </div>
                         <div className="form-group">
+                            <label>Номер телефона</label>
+                            <input name="phoneNumber" type="text" {...register('phoneNumber')} className={`form-control ${errors.phoneNumber ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.phoneNumber?.message}</div>
+                        </div>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.email?.message}</div>
+                        </div>
+                        <div className="form-group">
                             <label>Имя и фамилия</label>
-                            <input name="login" type="text" {...register('login')} className={`form-control ${errors.login ? 'is-invalid' : ''}`} />
-                            <div className="invalid-feedback">{errors.login?.message}</div>
+                            <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} />
+                            <div className="invalid-feedback">{errors.name?.message}</div>
                         </div>
                         <div className="form-group">
                             <label>Пароль</label>
