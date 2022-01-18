@@ -11,7 +11,6 @@ import {RolesContainer} from "../helpers/roles-container";
 
 export default function CreateTeam(){
     const router = useRouter();
-    InterestsContainer.clear();
     const id = localStorage.getItem('id').replace(/"/g, "");
     const validationSchema = Yup.object().shape({
         name: Yup.string()
