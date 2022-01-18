@@ -62,7 +62,7 @@ export default function CreateTeam(){
                 <div className="invalid-feedback">{errors.name?.message}</div>
             </div>
             <div className="form-group">
-                <label>Номер телефона</label>
+                <label>Номер телефона тимлида</label>
                 <input name="teamLeadPhoneNumber" type="text" {...register('teamLeadPhoneNumber')} className={`form-control ${errors.teamLeadPhoneNumber ? 'is-invalid' : ''}`} />
                 <div className="invalid-feedback">{errors.teamLeadPhoneNumber?.message}</div>
             </div>
