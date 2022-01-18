@@ -54,7 +54,7 @@ export default function CreateTeam(){
     }
 
     return <>
-        <div className="header"><h1>Редактировать профиль</h1></div>
+        <div className="header"><h1>Создание команды</h1></div>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label>Название команды</label>
